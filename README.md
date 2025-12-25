@@ -17,6 +17,26 @@ Single-binary Rust CLI for DataForSEO.
 cargo install --path crates/seo
 ```
 
+### From Git (requires Rust toolchain)
+
+```bash
+cargo install --git git@github.com:radjathaher/seo-cli-rs.git --package seo
+```
+
+### Prebuilt binaries (GitHub Releases)
+
+Once you have a Release tag (e.g. `v0.1.0`), download/install a matching asset:
+
+```bash
+BIN_DIR="$HOME/.local/bin" TAG="v0.1.0" ./install.sh
+```
+
+Notes:
+
+- For the current private repo, `install.sh` needs GitHub auth:
+  - preferred: `gh auth login` (then `./install.sh` works)
+  - or set `GITHUB_TOKEN` with access to the repo
+
 ### Build a release binary
 
 ```bash
