@@ -20,20 +20,6 @@ pub fn build_cli() -> Command {
     let mut root = Command::new("seo")
         .about("DataForSEO CLI (OpenAPI-driven)")
         .arg(
-            Arg::new("login")
-                .long("login")
-                .value_name("LOGIN")
-                .help("DataForSEO login (or env: DATAFORSEO_LOGIN)")
-                .global(true),
-        )
-        .arg(
-            Arg::new("password")
-                .long("password")
-                .value_name("PASSWORD")
-                .help("DataForSEO password (or env: DATAFORSEO_PASSWORD)")
-                .global(true),
-        )
-        .arg(
             Arg::new("base-url")
                 .long("base-url")
                 .value_name("URL")
@@ -52,13 +38,6 @@ pub fn build_cli() -> Command {
                 .long("timeout")
                 .value_name("SECONDS")
                 .help("HTTP timeout in seconds")
-                .global(true),
-        )
-        .arg(
-            Arg::new("no-interactive")
-                .long("no-interactive")
-                .action(ArgAction::SetTrue)
-                .help("Fail instead of prompting for credentials")
                 .global(true),
         )
         .arg(
@@ -84,16 +63,7 @@ pub fn build_cli() -> Command {
                 .help("Output format")
                 .global(true),
         )
-        .subcommand(
-            Command::new("auth")
-                .about("Manage stored credentials")
-                .subcommand(Command::new("login").about(
-                    "Prompt for DataForSEO credentials and save to ~/.seo-cli/credentials.toml",
-                ))
-                .subcommand(
-                    Command::new("logout").about("Overwrite credentials file with empty content"),
-                ),
-        );
+        ;
 
     for cmd in wrappers::commands() {
         root = root.subcommand(cmd);
@@ -123,7 +93,7 @@ pub fn resolve_operation(matches: &ArgMatches) -> Result<ResolvedOperation> {
                 current = sub;
                 continue;
             }
-            Some((name, sub)) if name != "auth" => {
+            Some((name, sub)) => {
                 path.push(name.to_string());
                 current = sub;
             }

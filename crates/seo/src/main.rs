@@ -8,17 +8,12 @@ mod wrappers;
 use crate::client::DataForSeoClient;
 use crate::output::print_output;
 use anyhow::{Context, Result};
-use clap::ArgMatches;
 
 fn main() -> Result<()> {
     let cmd = cli::build_cli();
     let matches = cmd.get_matches();
 
-    if let Some(("auth", sub)) = matches.subcommand() {
-        return handle_auth(sub);
-    }
-
-    let auth = config::resolve_credentials(&matches)?;
+    let auth = config::resolve_credentials()?;
     let base_url = cli::resolve_base_url(&matches)?;
     let timeout = cli::resolve_timeout(&matches)?;
     let format = cli::resolve_format(&matches)?;
@@ -65,27 +60,4 @@ fn main() -> Result<()> {
     print_output(&response, format)?;
 
     Ok(())
-}
-
-fn handle_auth(matches: &ArgMatches) -> Result<()> {
-    match matches.subcommand() {
-        Some(("login", _sub)) => {
-            let creds = config::prompt_credentials()?;
-            config::write_credentials(&creds)?;
-            println!(
-                "saved credentials to {}",
-                config::credentials_path().display()
-            );
-            Ok(())
-        }
-        Some(("logout", _sub)) => {
-            config::clear_credentials()?;
-            println!(
-                "cleared credentials in {}",
-                config::credentials_path().display()
-            );
-            Ok(())
-        }
-        _ => anyhow::bail!("unknown auth command"),
-    }
 }

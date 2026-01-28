@@ -26,7 +26,7 @@ curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/in
 Pin a version:
 
 ```bash
-SEO_CLI_VERSION="v0.1.2" curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
+SEO_CLI_VERSION="v0.1.3" curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
 ```
 
 ### From Git (requires Rust toolchain)
@@ -47,21 +47,7 @@ cargo build -p seo --release
 Credential precedence (highest → lowest):
 
 1) env `DATAFORSEO_AUTH` (Base64 `login:password`, optional `Basic ...`)
-2) `--login/--password`
-3) env `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD`
-4) `~/.seo-cli/credentials.toml`
-
-Interactive login (stores to `~/.seo-cli/credentials.toml`):
-
-```bash
-seo auth login
-```
-
-Logout (overwrites credentials file with empty content; no delete):
-
-```bash
-seo auth logout
-```
+2) env `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD`
 
 ## Output
 
