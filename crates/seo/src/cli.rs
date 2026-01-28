@@ -18,6 +18,7 @@ pub struct ResolvedOperation {
 
 pub fn build_cli() -> Command {
     let mut root = Command::new("seo")
+        .version(env!("CARGO_PKG_VERSION"))
         .about("DataForSEO CLI (OpenAPI-driven)")
         .arg(
             Arg::new("base-url")

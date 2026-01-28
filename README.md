@@ -26,7 +26,7 @@ curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/in
 Pin a version:
 
 ```bash
-SEO_CLI_VERSION="v0.1.3" curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
+SEO_CLI_VERSION="v0.1.4" curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
 ```
 
 ### From Git (requires Rust toolchain)
