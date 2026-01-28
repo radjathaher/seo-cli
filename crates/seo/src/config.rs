@@ -14,7 +14,7 @@ pub struct Credentials {
 
 pub fn credentials_path() -> PathBuf {
     let mut base = home_dir().expect("home dir");
-    base.push(".seo-cli-rs");
+    base.push(".seo-cli");
     base.push("credentials.toml");
     base
 }

@@ -1,4 +1,4 @@
-# seo-cli-rs
+# seo-cli
 
 Single-binary Rust CLI for DataForSEO.
 
@@ -17,25 +17,23 @@ Single-binary Rust CLI for DataForSEO.
 cargo install --path crates/seo
 ```
 
+### Install script (macOS arm64 + Linux x86_64)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
+```
+
+Pin a version:
+
+```bash
+SEO_CLI_VERSION="v0.1.1" curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
+```
+
 ### From Git (requires Rust toolchain)
 
 ```bash
-cargo install --git git@github.com:radjathaher/seo-cli-rs.git --package seo
+cargo install --git https://github.com/radjathaher/seo-cli.git --package seo
 ```
-
-### Prebuilt binaries (GitHub Releases)
-
-Once you have a Release tag (e.g. `v0.1.0`), download/install a matching asset:
-
-```bash
-BIN_DIR="$HOME/.local/bin" TAG="v0.1.0" ./install.sh
-```
-
-Notes:
-
-- For the current private repo, `install.sh` needs GitHub auth:
-  - preferred: `gh auth login` (then `./install.sh` works)
-  - or set `GITHUB_TOKEN` with access to the repo
 
 ### Build a release binary
 
@@ -50,9 +48,9 @@ Credential precedence (highest → lowest):
 
 1) `--login/--password`
 2) env `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD`
-3) `~/.seo-cli-rs/credentials.toml`
+3) `~/.seo-cli/credentials.toml`
 
-Interactive login (stores to `~/.seo-cli-rs/credentials.toml`):
+Interactive login (stores to `~/.seo-cli/credentials.toml`):
 
 ```bash
 seo auth login
@@ -116,7 +114,7 @@ seo serp top --kw "leadership strengths" --depth 20
 
 ## Updating the generated API surface (OpenAPI → CLI)
 
-If `openapi.yaml` changes:
+`openapi.yaml` is a snapshot of DataForSEO OpenApiDocumentation. If it changes:
 
 ```bash
 cargo run -p xtask -- gen

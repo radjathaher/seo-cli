@@ -1,6 +1,6 @@
 // AUTO-GENERATED. DO NOT EDIT.
 #![allow(dead_code)]
-use serde::{Deserialize, Serialize};
+use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -419,6 +419,8 @@ pub struct AiOptimizationChatGptLlmResponsesLiveResultInfo {
     pub datetime: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<AiOptimizationItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -479,6 +481,8 @@ pub struct AiOptimizationChatGptLlmResponsesTaskGetResultInfo {
     pub datetime: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<AiOptimizationItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -676,6 +680,8 @@ pub struct AiOptimizationChatGptLlmScraperTaskGetAdvancedResultInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fan_out_queries: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub brand_entities: Option<Vec<ChatGptBrandEntity>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub se_results_count: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_types: Option<Vec<String>>,
@@ -859,6 +865,8 @@ pub struct AiOptimizationClaudeLlmResponsesLiveResultInfo {
     pub datetime: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<AiOptimizationItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -919,6 +927,8 @@ pub struct AiOptimizationClaudeLlmResponsesTaskGetResultInfo {
     pub datetime: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<AiOptimizationItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1055,6 +1065,8 @@ pub struct AiOptimizationGeminiLlmResponsesLiveResultInfo {
     pub datetime: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<AiOptimizationItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1115,6 +1127,8 @@ pub struct AiOptimizationGeminiLlmResponsesTaskGetResultInfo {
     pub datetime: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<AiOptimizationItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1416,6 +1430,14 @@ pub struct AiOptimizationLlmMentionsSearchLiveItem {
     pub ai_search_volume: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub monthly_searches: Option<Vec<MonthlySearchesInfo>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub first_response_at: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub last_response_at: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub brand_entities: Option<Vec<BrandEntities>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1626,6 +1648,10 @@ pub struct AiOptimizationLlmMentionssLiveItem {
     pub sources_domain: Option<Vec<GroupElement>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_results_domain: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub brand_entities_title: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub brand_entities_category: Option<Vec<GroupElement>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1674,6 +1700,8 @@ pub struct AiOptimizationPerplexityLlmResponsesLiveResultInfo {
     pub datetime: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<AiOptimizationItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fan_out_queries: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1708,6 +1736,24 @@ pub struct AiOptimizationPerplexityLlmResponsesModelsTaskInfo {
     pub base_response_task_info: BaseResponseTaskInfo,
     #[serde(flatten)]
     pub extra: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AiOptimizationResultTotalInfo {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub platform: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sources_domain: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search_results_domain: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub brand_entities_title: Option<Vec<GroupElement>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub brand_entities_category: Option<Vec<GroupElement>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -8242,6 +8288,16 @@ pub struct BingVideoSerpElementItem {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BrandEntities {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub position: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub category: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BulkMetricsBundleInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub organic: Option<serde_json::Value>,
@@ -10744,6 +10800,21 @@ pub struct ChannelSubscribersCount {
     pub displayed_count: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub count: Option<i64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ChatGptBrandEntity {
+    #[serde(rename = "type")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub type_: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub category: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub markdown: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub urls: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -14153,6 +14224,8 @@ pub struct DataforseoLabsGoogleCategoriesForDomainLiveRequestInfo {
     pub include_subcategories: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub include_clickstream_data: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub historical_serp_mode: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_types: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -17884,6 +17957,8 @@ pub struct GoogleReviewsSearch {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub original_review_text: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub original_language: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub time_ago: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub timestamp: Option<String>,
@@ -17921,6 +17996,47 @@ pub struct GoogleReviewsSearch {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GoogleReviewsSerpElementItem {
+    #[serde(flatten)]
+    pub extra: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GoogleShoppingCarouselElement {
+    #[serde(rename = "type")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub type_: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub xpath: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tags: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub seller: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub price: Option<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub currency: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub product_rating: Option<serde_json::Value>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub product_images: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shopping_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub product_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub data_docid: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub gid: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub delivery_info: Option<serde_json::Value>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub special_offer_info: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GoogleShoppingCarouselElementItem {
     #[serde(flatten)]
     pub extra: serde_json::Value,
 }
@@ -18694,7 +18810,7 @@ pub struct KeywordsDataBingAudienceEstimationLiveResultInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub est_ctr: Option<serde_json::Value>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub suggested_bid: Option<f64>,
+    pub suggested_bid: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub suggested_budget: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -19270,7 +19386,7 @@ pub struct KeywordsDataBingKeywordsForSiteLiveResultInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub competition: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub cpc: Option<i64>,
+    pub cpc: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_volume: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -22671,10 +22787,12 @@ pub struct MerchantAmazonReviewsTasksReadyTaskInfo {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct MerchantAmazonSellerItemSerpElementItem {}
+pub struct MerchantAmazonSellerItemSerpElementItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct MerchantAmazonSellerMainItemSerpElementItem {}
+pub struct MerchantAmazonSellerMainItemSerpElementItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MerchantAmazonSellersTaskGetAdvancedResponseInfo {
@@ -23698,7 +23816,8 @@ pub struct OnPageBrokenResourceItem {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct OnPageCanonicalLinkItem {}
+pub struct OnPageCanonicalLinkItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OnPageContentParsingLiveRequestInfo {
@@ -24120,7 +24239,7 @@ pub struct OnPageInstantPagesResultInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items_count: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub items: Option<Vec<OnPageStylesheetResourceItem>>,
+    pub items: Option<Vec<BaseOnPageResourceItem>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -24376,7 +24495,8 @@ pub struct OnPageLighthouseVersionsTaskInfo {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct OnPageLinkLinkItem {}
+pub struct OnPageLinkLinkItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OnPageLinksRequestInfo {
@@ -24433,7 +24553,8 @@ pub struct OnPageLinksTaskInfo {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct OnPageMetaLinkItem {}
+pub struct OnPageMetaLinkItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OnPageMicrodataInfoItem {
@@ -24785,7 +24906,8 @@ pub struct OnPageRedirectChainsTaskInfo {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct OnPageRedirectLinkItem {}
+pub struct OnPageRedirectLinkItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OnPageRedirectResourceItem {
@@ -26305,7 +26427,8 @@ pub struct SerpApiBingAiOverviewVideosElementItem {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct SerpApiBingPeopleAlsoAskExpandedElementItem {}
+pub struct SerpApiBingPeopleAlsoAskExpandedElementItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpApiCarouselElement {
@@ -26543,7 +26666,8 @@ pub struct SerpApiKnowledgeGraphShoppingItemElementItem {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct SerpApiMapsPaidItemElementItem {}
+pub struct SerpApiMapsPaidItemElementItem {
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpApiMapsSearchElementItem {
@@ -28293,19 +28417,19 @@ pub struct SerpGoogleAiModeLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub calculate_rectangles: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -28315,7 +28439,7 @@ pub struct SerpGoogleAiModeLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub browser_screen_resolution_ratio: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub location_coordinate: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -28519,21 +28643,27 @@ pub struct SerpGoogleAiModeTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub priority: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub pingback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_data: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub calculate_rectangles: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -28543,13 +28673,7 @@ pub struct SerpGoogleAiModeTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub browser_screen_resolution_ratio: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_data: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
+    pub location_coordinate: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -29315,27 +29439,27 @@ pub struct SerpGoogleEventsLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub date_range: Option<String>,
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_crawl_pages: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub date_range: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -29437,35 +29561,35 @@ pub struct SerpGoogleEventsTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub date_range: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub os: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
+    pub priority: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub pingback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_data: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub date_range: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -30629,31 +30753,31 @@ pub struct SerpGoogleFinanceTickerSearchTasksReadyTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleImagesLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
+    pub language_code: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_crawl_pages: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_param: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -30706,31 +30830,31 @@ pub struct SerpGoogleImagesLiveAdvancedTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleImagesLiveHtmlRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
+    pub language_code: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_crawl_pages: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_param: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -30857,39 +30981,39 @@ pub struct SerpGoogleImagesTaskGetHtmlTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleImagesTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub os: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
+    pub priority: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_param: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub pingback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_data: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search_param: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31069,29 +31193,29 @@ pub struct SerpGoogleJobsTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_radius: Option<f64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub employment_type: Option<Vec<String>>,
+    pub priority: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub pingback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_data: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_radius: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub employment_type: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31211,29 +31335,29 @@ pub struct SerpGoogleLocalFinderLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub min_rating: Option<f64>,
+    pub priority: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub min_rating: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub time_filter: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31288,29 +31412,27 @@ pub struct SerpGoogleLocalFinderLiveHtmlRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub min_rating: Option<f64>,
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub min_rating: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub time_filter: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31439,35 +31561,35 @@ pub struct SerpGoogleLocalFinderTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub device: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub os: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub min_rating: Option<f64>,
+    pub priority: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub time_filter: Option<String>,
+    pub device: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub pingback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postback_data: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub min_rating: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub time_filter: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31621,35 +31743,35 @@ pub struct SerpGoogleLocationsTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleMapsLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub device: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub os: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub device: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_this_area: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_places: Option<bool>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31749,43 +31871,43 @@ pub struct SerpGoogleMapsTaskGetAdvancedTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleMapsTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub device: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub os: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub priority: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub device: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pingback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_data: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_this_area: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_places: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tag: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_data: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31881,19 +32003,21 @@ pub struct SerpGoogleNewsLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search_param: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub calculate_rectangles: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -31903,13 +32027,11 @@ pub struct SerpGoogleNewsLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub browser_screen_resolution_ratio: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_param: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -31964,31 +32086,31 @@ pub struct SerpGoogleNewsLiveAdvancedTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleNewsLiveHtmlRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
+    pub language_code: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_crawl_pages: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_param: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32119,21 +32241,31 @@ pub struct SerpGoogleNewsTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub priority: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pingback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_data: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search_param: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub calculate_rectangles: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -32143,21 +32275,11 @@ pub struct SerpGoogleNewsTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub browser_screen_resolution_ratio: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_param: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_data: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32253,41 +32375,37 @@ pub struct SerpGoogleOrganicLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
+    pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub load_async_ai_overview: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub target: Option<String>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub stop_crawl_on_match: Option<Vec<SerpApiStopCrawlOnMatchInfo>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub match_value: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub match_type: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub target_search_mode: Option<String>,
+    pub match_value: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub find_targets_in: Option<Vec<String>>,
+    pub max_crawl_pages: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ignore_targets_in: Option<Vec<String>>,
+    pub search_param: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub remove_from_url: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub people_also_ask_click_depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub group_organic_results: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -32299,15 +32417,19 @@ pub struct SerpGoogleOrganicLiveAdvancedRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub browser_screen_resolution_ratio: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub people_also_ask_click_depth: Option<i64>,
+    pub url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub load_async_ai_overview: Option<bool>,
+    pub location_coordinate: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_param: Option<String>,
+    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub remove_from_url: Option<Vec<String>>,
+    pub target: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
+    pub target_search_mode: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub find_targets_in: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ignore_targets_in: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32362,49 +32484,49 @@ pub struct SerpGoogleOrganicLiveAdvancedTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleOrganicLiveHtmlRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub load_async_ai_overview: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub depth: Option<i64>,
+    pub stop_crawl_on_match: Option<Vec<SerpApiStopCrawlOnMatchInfo>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub match_type: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub match_value: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_crawl_pages: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub search_param: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub load_async_ai_overview: Option<bool>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub expand_ai_overview: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub stop_crawl_on_match: Option<Vec<SerpApiStopCrawlOnMatchInfo>>,
+    pub url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub match_value: Option<String>,
+    pub location_coordinate: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub match_type: Option<String>,
+    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub target_search_mode: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub find_targets_in: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ignore_targets_in: Option<Vec<String>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32447,49 +32569,49 @@ pub struct SerpGoogleOrganicLiveHtmlTaskInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerpGoogleOrganicLiveRegularRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub device: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub os: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub target: Option<String>,
+    pub device: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub stop_crawl_on_match: Option<Vec<SerpApiStopCrawlOnMatchInfo>>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub match_type: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub match_value: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub match_type: Option<String>,
+    pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search_param: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub group_organic_results: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_coordinate: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub se_domain: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub target: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub target_search_mode: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub find_targets_in: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ignore_targets_in: Option<Vec<String>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub group_organic_results: Option<bool>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_param: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32681,41 +32803,49 @@ pub struct SerpGoogleOrganicTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub keyword: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
+    pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
+    pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub stop_crawl_on_match: Option<Vec<SerpApiStopCrawlOnMatchInfo>>,
+    pub device: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub match_value: Option<String>,
+    pub load_async_ai_overview: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub match_type: Option<String>,
+    pub pingback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub target_search_mode: Option<String>,
+    pub postback_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub find_targets_in: Option<Vec<String>>,
+    pub postback_data: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ignore_targets_in: Option<Vec<String>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
+    pub priority: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_code: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_coordinate: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_code: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub device: Option<String>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub os: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stop_crawl_on_match: Option<Vec<SerpApiStopCrawlOnMatchInfo>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub match_type: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub match_value: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search_param: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub remove_from_url: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub expand_ai_overview: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub people_also_ask_click_depth: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub group_organic_results: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -32727,23 +32857,15 @@ pub struct SerpGoogleOrganicTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub browser_screen_resolution_ratio: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub people_also_ask_click_depth: Option<i64>,
+    pub url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub load_async_ai_overview: Option<bool>,
+    pub target_search_mode: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub expand_ai_overview: Option<bool>,
+    pub find_targets_in: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_param: Option<String>,
+    pub ignore_targets_in: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub remove_from_url: Option<Vec<String>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_data: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32888,21 +33010,27 @@ pub struct SerpGoogleSearchByImageTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub image_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_crawl_pages: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location_coordinate: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub se_domain: Option<String>,
+    pub pingback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub postback_data: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub priority: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub location_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_crawl_pages: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search_param: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub calculate_rectangles: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -32912,15 +33040,9 @@ pub struct SerpGoogleSearchByImageTaskPostRequestInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub browser_screen_resolution_ratio: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_param: Option<String>,
+    pub location_coordinate: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tag: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub postback_data: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub pingback_url: Option<String>,
+    pub se_domain: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -35542,20 +35664,6 @@ pub struct TopicInfo {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Total {
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub location: Option<Vec<GroupElement>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub language: Option<Vec<GroupElement>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub platform: Option<Vec<GroupElement>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub sources_domain: Option<Vec<GroupElement>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_results_domain: Option<Vec<GroupElement>>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TrendsGraphDataInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub date_from: Option<String>,
@@ -35901,3 +36009,4 @@ pub struct YoutubeVideoInfo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub streaming_quality: Option<Vec<StreamingQualityElement>>,
 }
+

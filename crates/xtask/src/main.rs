@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use serde_json::Value as JsonValue;
 use serde_yaml::Value;
-use std::collections::{BTreeMap, BTreeSet, HashMap};
+use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::fs;
 use std::path::PathBuf;
 
@@ -40,7 +40,8 @@ fn generate() -> Result<()> {
         .and_then(|v| v.as_mapping())
         .context("missing paths")?;
 
-    let ops = collect_operations(paths)?;
+    let mut ops = collect_operations(paths)?;
+    assign_unique_idents(&mut ops);
 
     let gen_dir = root.join("crates/seo/src/generated");
     fs::create_dir_all(&gen_dir).context("create generated dir")?;
@@ -76,6 +77,7 @@ fn repo_root() -> Result<PathBuf> {
 #[derive(Clone, Debug)]
 struct Operation {
     operation_id: String,
+    ident: String,
     method: String,
     path: String,
     description: String,
@@ -101,6 +103,7 @@ fn collect_operations(paths: &serde_yaml::Mapping) -> Result<Vec<Operation>> {
                 .and_then(|v| v.as_str())
                 .context("operationId")?
                 .to_string();
+            let ident = operation_id.clone();
             let description = op
                 .get(&Value::String("description".into()))
                 .and_then(|v| v.as_str())
@@ -117,6 +120,7 @@ fn collect_operations(paths: &serde_yaml::Mapping) -> Result<Vec<Operation>> {
 
             ops.push(Operation {
                 operation_id,
+                ident,
                 method,
                 path: path.clone(),
                 description,
@@ -546,7 +550,7 @@ fn render_meta(ops: &[Operation], schemas: &BTreeMap<String, Value>) -> Result<S
     let mut op_defs = String::new();
 
     for op in ops {
-        let field_ident = format!("FIELDS_{}", op.operation_id);
+        let field_ident = format!("FIELDS_{}", op.ident);
         let fields = render_fields_for_operation(op, &field_ident, schemas)?;
         field_defs.push_str(&fields);
 
@@ -568,7 +572,8 @@ fn render_meta(ops: &[Operation], schemas: &BTreeMap<String, Value>) -> Result<S
         );
 
         op_defs.push_str(&format!(
-            "pub static OP_{id}: OperationMeta = OperationMeta {{\n    operation_id: \"{id}\",\n    method: \"{method}\",\n    path: \"{path}\",\n    description: {desc:?},\n    request_schema: {req},\n    response_schema: {resp},\n    path_params: &{params:?},\n    fields: {fields_name},\n    request_example: {example},\n    cli_path: {cli_vec},\n}};\n\n",
+            "pub static OP_{ident}: OperationMeta = OperationMeta {{\n    operation_id: \"{id}\",\n    method: \"{method}\",\n    path: \"{path}\",\n    description: {desc:?},\n    request_schema: {req},\n    response_schema: {resp},\n    path_params: &{params:?},\n    fields: {fields_name},\n    request_example: {example},\n    cli_path: {cli_vec},\n}};\n\n",
+            ident = op.ident,
             id = op.operation_id,
             method = op.method,
             path = op.path,
@@ -587,7 +592,7 @@ fn render_meta(ops: &[Operation], schemas: &BTreeMap<String, Value>) -> Result<S
 
     out.push_str("pub static OPERATIONS: &[OperationMeta] = &[");
     for op in ops {
-        out.push_str(&format!("OP_{},", op.operation_id));
+        out.push_str(&format!("OP_{},", op.ident));
     }
     out.push_str("];\n");
 
@@ -704,6 +709,70 @@ fn cli_path_for(path: &str, method: &str, multi: &BTreeSet<String>) -> Vec<Strin
     segments
 }
 
+fn assign_unique_idents(ops: &mut [Operation]) {
+    let mut used = HashSet::new();
+    for op in ops {
+        let base = op.operation_id.clone();
+        if used.insert(base.clone()) {
+            op.ident = base;
+            continue;
+        }
+
+        let suffix = ident_suffix_from_path(&op.path, &op.method);
+        let mut candidate = format!("{base}{suffix}");
+        let mut idx = 2;
+        while used.contains(&candidate) {
+            candidate = format!("{base}{suffix}{idx}");
+            idx += 1;
+        }
+        op.ident = candidate.clone();
+        used.insert(candidate);
+    }
+}
+
+fn ident_suffix_from_path(path: &str, method: &str) -> String {
+    let mut parts = path
+        .split('/')
+        .filter(|s| !s.is_empty())
+        .collect::<Vec<_>>();
+    if parts.first().map(|s| s.starts_with('v')).unwrap_or(false) {
+        parts.remove(0);
+    }
+    let mut out = String::new();
+    for part in parts {
+        if part.starts_with('{') {
+            continue;
+        }
+        out.push_str(&pascal_case(part));
+    }
+    if out.is_empty() {
+        out.push_str(&pascal_case(method));
+    }
+    out
+}
+
+fn pascal_case(s: &str) -> String {
+    let mut out = String::new();
+    let mut next_upper = true;
+    for ch in s.chars() {
+        if ch.is_ascii_alphanumeric() {
+            if next_upper {
+                out.push(ch.to_ascii_uppercase());
+                next_upper = false;
+            } else {
+                out.push(ch.to_ascii_lowercase());
+            }
+        } else {
+            next_upper = true;
+        }
+    }
+    if out.is_empty() {
+        "Op".to_string()
+    } else {
+        out
+    }
+}
+
 fn render_ops(ops: &[Operation]) -> Result<String> {
     let mut out = String::new();
     out.push_str("// AUTO-GENERATED. DO NOT EDIT.\n");
@@ -713,7 +782,7 @@ fn render_ops(ops: &[Operation]) -> Result<String> {
     out.push_str("use crate::generated::models::*;\n\n");
 
     for op in ops {
-        let fn_name = snake_case(&op.operation_id);
+        let fn_name = snake_case(&op.ident);
         let req = op.request_schema.as_deref().unwrap_or("serde_json::Value");
         let resp = op.response_schema.as_deref().unwrap_or("serde_json::Value");
         let path = &op.path;

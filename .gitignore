@@ -4,5 +4,7 @@
 .env
 *.swp
 *.swo
+tmp.*
+tmp/
 .idea/
 .vscode/

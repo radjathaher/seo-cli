@@ -1,11 +1,11 @@
 [package]
 name = "seo"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "OpenAPI-driven DataForSEO API CLI (plus workflow wrappers)"
 readme = "../../README.md"
-homepage = "https://github.com/radjathaher/seo-cli-rs"
-repository = "https://github.com/radjathaher/seo-cli-rs"
+homepage = "https://github.com/radjathaher/seo-cli"
+repository = "https://github.com/radjathaher/seo-cli"
 keywords = ["seo", "dataforseo", "cli"]
 categories = ["command-line-utilities"]
 license = "MIT OR Apache-2.0"

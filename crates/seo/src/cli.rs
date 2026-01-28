@@ -88,7 +88,7 @@ pub fn build_cli() -> Command {
             Command::new("auth")
                 .about("Manage stored credentials")
                 .subcommand(Command::new("login").about(
-                    "Prompt for DataForSEO credentials and save to ~/.seo-cli-rs/credentials.toml",
+                    "Prompt for DataForSEO credentials and save to ~/.seo-cli/credentials.toml",
                 ))
                 .subcommand(
                     Command::new("logout").about("Overwrite credentials file with empty content"),
