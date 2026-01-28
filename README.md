@@ -26,7 +26,7 @@ curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/in
 Pin a version:
 
 ```bash
-SEO_CLI_VERSION="v0.1.1" curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
+SEO_CLI_VERSION="v0.1.2" curl -fsSL https://raw.githubusercontent.com/radjathaher/seo-cli/main/scripts/install.sh | bash
 ```
 
 ### From Git (requires Rust toolchain)
@@ -46,9 +46,10 @@ cargo build -p seo --release
 
 Credential precedence (highest → lowest):
 
-1) `--login/--password`
-2) env `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD`
-3) `~/.seo-cli/credentials.toml`
+1) env `DATAFORSEO_AUTH` (Base64 `login:password`, optional `Basic ...`)
+2) `--login/--password`
+3) env `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD`
+4) `~/.seo-cli/credentials.toml`
 
 Interactive login (stores to `~/.seo-cli/credentials.toml`):
 
@@ -95,7 +96,7 @@ Generate a curl command instead of calling the API:
 seo dfs dataforseo-labs google ranked-keywords live --target soreno.ai --location-code 2840 --language-code en --limit 20 --curl
 ```
 
-`--curl` never embeds secrets; it uses `$DATAFORSEO_LOGIN/$DATAFORSEO_PASSWORD`.
+`--curl` never embeds secrets; it uses `$DATAFORSEO_AUTH` when set, otherwise `$DATAFORSEO_LOGIN/$DATAFORSEO_PASSWORD`.
 
 ## Wrapper commands (JTBD)
 

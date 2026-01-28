@@ -18,12 +18,12 @@ fn main() -> Result<()> {
         return handle_auth(sub);
     }
 
-    let creds = config::resolve_credentials(&matches)?;
+    let auth = config::resolve_credentials(&matches)?;
     let base_url = cli::resolve_base_url(&matches)?;
     let timeout = cli::resolve_timeout(&matches)?;
     let format = cli::resolve_format(&matches)?;
 
-    let client = DataForSeoClient::new(base_url, creds, timeout);
+    let client = DataForSeoClient::new(base_url, auth.creds.clone(), timeout, auth.curl_auth);
 
     if wrappers::handle(&matches, &client, format)? {
         return Ok(());
@@ -35,9 +35,18 @@ fn main() -> Result<()> {
         let curl = client.build_curl(&resolved.path, &resolved.method, resolved.body.as_ref())?;
         println!("{curl}");
         if matches.get_flag("curl") {
-            eprintln!(
-                "note: uses $DATAFORSEO_LOGIN/$DATAFORSEO_PASSWORD (secrets not embedded in --curl output)"
-            );
+            match auth.curl_auth {
+                config::CurlAuthHint::BasicEnv => {
+                    eprintln!(
+                        "note: uses $DATAFORSEO_AUTH (secrets not embedded in --curl output)"
+                    );
+                }
+                config::CurlAuthHint::LoginPasswordEnv => {
+                    eprintln!(
+                        "note: uses $DATAFORSEO_LOGIN/$DATAFORSEO_PASSWORD (secrets not embedded in --curl output)"
+                    );
+                }
+            }
         }
         return Ok(());
     } else {

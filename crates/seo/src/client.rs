@@ -5,16 +5,22 @@ use serde::Serialize;
 use serde_json::Value;
 use std::time::Duration;
 
-use crate::config::Credentials;
+use crate::config::{Credentials, CurlAuthHint};
 
 pub struct DataForSeoClient {
     base_url: String,
     creds: Credentials,
+    curl_auth: CurlAuthHint,
     http: reqwest::Client,
 }
 
 impl DataForSeoClient {
-    pub fn new(base_url: String, creds: Credentials, timeout: Duration) -> Self {
+    pub fn new(
+        base_url: String,
+        creds: Credentials,
+        timeout: Duration,
+        curl_auth: CurlAuthHint,
+    ) -> Self {
         let http = reqwest::Client::builder()
             .timeout(timeout)
             .build()
@@ -22,6 +28,7 @@ impl DataForSeoClient {
         Self {
             base_url,
             creds,
+            curl_auth,
             http,
         }
     }
@@ -31,8 +38,16 @@ impl DataForSeoClient {
         let mut parts: Vec<String> = Vec::new();
         parts.push("curl".to_string());
         parts.push("-sS".to_string());
-        parts.push("-u".to_string());
-        parts.push(r#"$DATAFORSEO_LOGIN:$DATAFORSEO_PASSWORD"#.to_string());
+        match self.curl_auth {
+            CurlAuthHint::BasicEnv => {
+                parts.push("-H".to_string());
+                parts.push(r#""Authorization: Basic $DATAFORSEO_AUTH""#.to_string());
+            }
+            CurlAuthHint::LoginPasswordEnv => {
+                parts.push("-u".to_string());
+                parts.push(r#"$DATAFORSEO_LOGIN:$DATAFORSEO_PASSWORD"#.to_string());
+            }
+        }
         parts.push("-X".to_string());
         parts.push(method.to_uppercase());
         parts.push(url);
@@ -103,6 +118,9 @@ impl DataForSeoClient {
 }
 
 fn sh_quote(s: &str) -> String {
+    if s.starts_with('"') && s.ends_with('"') {
+        return s.to_string();
+    }
     let safe = s
         .chars()
         .all(|c| c.is_ascii_alphanumeric() || "-._~/:=@".contains(c));
